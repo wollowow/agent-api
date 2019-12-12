@@ -54,9 +54,7 @@ public class ClassPathRemoteClientScanner extends ClassPathBeanDefinitionScanner
         }
 
         if (acceptAllInterfaces) {
-            this.addIncludeFilter((metadataReader, metadataReaderFactory) -> {
-                return true;
-            });
+            this.addIncludeFilter((metadataReader, metadataReaderFactory) -> true);
         }
 
         this.addExcludeFilter((metadataReader, metadataReaderFactory) -> {

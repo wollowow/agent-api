@@ -1,8 +1,4 @@
-package com.hrbank.agent.spring;//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
+package com.hrbank.agent.spring;
 
 import com.hrbank.agent.proxy.ApiConfiguration;
 import org.slf4j.Logger;

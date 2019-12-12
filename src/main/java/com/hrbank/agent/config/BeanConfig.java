@@ -9,8 +9,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.env.Environment;
+import org.springframework.util.StringUtils;
 
 import java.util.concurrent.TimeUnit;
+
+import javax.annotation.Resource;
 
 /**
  * Title:BeanConfig
@@ -22,14 +26,25 @@ import java.util.concurrent.TimeUnit;
 @Import(SpringBeanUtils.class)
 public class BeanConfig {
 
+    @Resource
+    private Environment environment;
+
     @Bean
     public OkHttpClient okHttpClient() {
+        String connectTimeoutStr = environment.getProperty("ok-http-client.connect.timeout");
+        String readTimeoutStr = environment.getProperty("ok-http-client.read.timeout");
+        String writeTimeoutStr = environment.getProperty("ok-http-client.write.timeout");
+
+        long readTimeout = StringUtils.isEmpty(readTimeoutStr) ? 30L : Long.parseLong(readTimeoutStr);
+        long writeTimeout = StringUtils.isEmpty(writeTimeoutStr) ? 30L : Long.parseLong(writeTimeoutStr);
+        long connectTimeout = StringUtils.isEmpty(connectTimeoutStr) ? 30L : Long.parseLong(connectTimeoutStr);
+
         return new OkHttpClient.Builder()
                 .retryOnConnectionFailure(false)
                 .connectionPool(pool())
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30,TimeUnit.SECONDS)
+                .connectTimeout(connectTimeout, TimeUnit.SECONDS)
+                .readTimeout(readTimeout, TimeUnit.SECONDS)
+                .writeTimeout(writeTimeout, TimeUnit.SECONDS)
                 .build();
     }
 
@@ -44,7 +59,7 @@ public class BeanConfig {
 
     @Bean
     @DependsOn("okHttpClient")
-    public OKHttpUtils okHttpUtils(){
+    public OKHttpUtils okHttpUtils() {
         return new OKHttpUtils();
     }
 }

@@ -35,11 +35,7 @@ public class ApiProxy<T> extends AbstractApiProxy implements InvocationHandler, 
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (Object.class.equals(method.getDeclaringClass())) {
-            try {
                 return method.invoke(this, args);
-            } catch (Throwable var5) {
-                throw var5;
-            }
         } else {
             AbstractInvoker invoker = this.cachedMethod(method);
             return this.execute(invoker, args);

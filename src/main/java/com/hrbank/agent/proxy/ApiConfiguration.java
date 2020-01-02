@@ -1,9 +1,7 @@
 package com.hrbank.agent.proxy;
 
 import com.hrbank.agent.exception.ApiProxyException;
-import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.core.env.Environment;
-import org.springframework.util.StringUtils;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,10 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
  **/
 public class ApiConfiguration {
 
-    public static final String LOG_RESULT_MAX_SIZE = "hshc.remoteclient.log.maxResultSize";
     private Environment environment;
     private final Map<Class<?>, ApiProxyFactory<?>> knownInvokers = new ConcurrentHashMap();
-    private int maxResultSize4Log;
 
     public ApiConfiguration() {
     }
@@ -53,18 +49,5 @@ public class ApiConfiguration {
 
     public Environment getEnvironment() {
         return this.environment;
-    }
-
-    public void setEnvironment(Environment environment) {
-        this.environment = environment;
-        if (null != environment) {
-            String max = environment.getProperty("hshc.remoteclient.log.maxResultSize");
-            this.maxResultSize4Log = StringUtils.isEmpty(max) ? 200 : Integer.parseInt(max);
-        }
-
-    }
-
-    public int getMaxResultSize4Log() {
-        return this.maxResultSize4Log;
     }
 }

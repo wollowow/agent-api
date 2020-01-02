@@ -22,9 +22,9 @@ public class OKHttpUtils {
      * 参数一：请求Url
      * 参数二：请求的xmlString
      */
-    public String post(String url, String xml, String type, String encode) {
+    public String post(String url, String param, String type, String encode) {
         String responseBody = "";
-        RequestBody requestBody = RequestBody.create(MediaType.parse(type + ";charset=" + encode), xml);
+        RequestBody requestBody = RequestBody.create(MediaType.parse(type + ";charset=" + encode), param);
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -44,8 +44,8 @@ public class OKHttpUtils {
     }
 
 
-    public String postStringParams(String url, String xml) {
-        return post(url, xml, "text/plain", "utf-8");
+    public String postStringParams(String url, String param) {
+        return post(url, param, "text/plain", "utf-8");
     }
 
     public String postJsonParams(String url, String json) {

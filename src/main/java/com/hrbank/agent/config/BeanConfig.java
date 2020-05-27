@@ -1,6 +1,5 @@
 package com.hrbank.agent.config;
 
-import com.hrbank.agent.annotation.ApiScan;
 import com.hrbank.agent.http.OKHttpUtils;
 import com.hrbank.agent.spring.SpringBeanUtils;
 import okhttp3.ConnectionPool;

@@ -50,13 +50,13 @@ public class ApiProxy<T> extends AbstractApiProxy implements InvocationHandler, 
             ApiRequestType requestType = serviceAnnotation.requestType();
             switch (requestType) {
                 case XML:
-                    invoker = XMLInvoker.newInstance(this.clientInterface, method);
+                    invoker = XMLInvoker.newInstance(this.clientInterface, method, serviceAnnotation.parser());
                     break;
                 case JSON:
-                    invoker = JSONInvoker.newInstance(this.clientInterface, method);
+                    invoker = JSONInvoker.newInstance(this.clientInterface, method,serviceAnnotation.parser());
                     break;
                 default:
-                    invoker = DefaultInvoker.newInstance(this.clientInterface, method);
+                    invoker = DefaultInvoker.newInstance(this.clientInterface, method, serviceAnnotation.parser());
                     break;
             }
             this.parseParameter(method, invoker);

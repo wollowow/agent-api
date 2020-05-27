@@ -1,6 +1,8 @@
 package com.hrbank.agent.annotation;
 
 
+import com.hrbank.agent.parser.Parser;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,6 +19,8 @@ public @interface ApiService {
     String host() default "";
 
     ApiRequestType requestType() default ApiRequestType.XML;
+
+    Class<? extends Parser> parser() default Parser.class;
 
     String description() default "";
 }

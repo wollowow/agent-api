@@ -1,6 +1,6 @@
 package com.hrbank.agent.config;
 
-import com.hrbank.agent.http.OKHttpUtils;
+import com.hrbank.agent.http.OKHttpUtil;
 import com.hrbank.agent.spring.SpringBeanUtils;
 import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
@@ -56,9 +56,9 @@ public class BeanConfig {
         return new ConnectionPool(200, 5, TimeUnit.MINUTES);
     }
 
-    @Bean
+    @Bean(name = "okHttpUtil")
     @DependsOn("okHttpClient")
-    public OKHttpUtils okHttpUtils() {
-        return new OKHttpUtils();
+    public OKHttpUtil okHttpUtil() {
+        return new OKHttpUtil();
     }
 }

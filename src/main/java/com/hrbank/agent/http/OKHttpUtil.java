@@ -12,15 +12,15 @@ import javax.annotation.Resource;
 
 @Data
 @Slf4j
-public class OKHttpUtils {
+public class OKHttpUtil {
 
     @Resource
     private OkHttpClient okHttpClient;
 
     /**
-     * Post请求发送xml数据....
+     * Post请求发送数据....
      * 参数一：请求Url
-     * 参数二：请求的xmlString
+     * 参数二：请求的String
      */
     public String post(String url, String param, String type, String encode) {
         String responseBody = "";
@@ -39,17 +39,17 @@ public class OKHttpUtils {
         return responseBody;
     }
 
-    public String postXmlParams(String url, String xml) {
-        return post(url, xml, "application/xml", "utf-8");
+
+    public String postXmlParams(String url, String xml, String encoding) {
+        return post(url, xml, "application/xml", encoding);
     }
 
 
-    public String postStringParams(String url, String param) {
-        return post(url, param, "text/plain", "utf-8");
+    public String postStringParams(String url, String param, String encoding) {
+        return post(url, param, "text/plain", encoding);
     }
 
-    public String postJsonParams(String url, String json) {
-        return post(url, json, "application/json", "utf-8");
+    public String postJsonParams(String url, String json, String encoding) {
+        return post(url, json, "application/json", encoding);
     }
-
 }

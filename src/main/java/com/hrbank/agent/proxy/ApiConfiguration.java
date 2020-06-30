@@ -6,6 +6,8 @@ import org.springframework.core.env.Environment;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.Resource;
+
 /**
  * Title:ApiConfiguration
  *
@@ -13,6 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  **/
 public class ApiConfiguration {
 
+    @Resource
     private Environment environment;
     private final Map<Class<?>, ApiProxyFactory<?>> knownInvokers = new ConcurrentHashMap();
 

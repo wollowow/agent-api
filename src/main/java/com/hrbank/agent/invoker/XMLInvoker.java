@@ -1,9 +1,9 @@
 package com.hrbank.agent.invoker;
 
-import com.hrbank.agent.exception.ParseResultException;
-import com.hrbank.agent.http.OKHttpUtils;
+import com.hrbank.agent.http.OKHttpUtil;
 import com.hrbank.agent.parser.Parser;
 import com.hrbank.agent.spring.SpringBeanUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 
@@ -12,10 +12,10 @@ import java.lang.reflect.Method;
  *
  * @author liumenghua
  **/
+@Slf4j
 public class XMLInvoker<T> extends AbstractInvoker<T> {
 
-
-    public XMLInvoker() {
+    private XMLInvoker() {
     }
 
     public static <T> XMLInvoker newInstance(Class<T> interfaceClass, Method method, Class<? extends Parser> parser) {
@@ -27,16 +27,10 @@ public class XMLInvoker<T> extends AbstractInvoker<T> {
     }
 
     public Object execute(Object[] args) {
-        OKHttpUtils okHttpUtils = (OKHttpUtils) SpringBeanUtils.getBean("okHttpUtils");
-        String result = okHttpUtils.postXmlParams(this.getHost() + this.getPath(), args[0].toString());
-        if (Parser.class == this.getParser()) {
-            return result;
-        }
-        try {
-            return this.getParser().newInstance().parserResult(result, this.getMethod().getReturnType());
-        } catch (Exception e) {
-            throw new ParseResultException("http result parse fail", e);
-        }
+        OKHttpUtil okHttpUtil = (OKHttpUtil) SpringBeanUtils.getBean("okHttpUtil");
+        String param = null == args ? "" : args[0].toString();
+        String result = okHttpUtil.postXmlParams(this.getHost() + this.getPath(), param, this.getEncoding());
+        return parseResult(result);
     }
 
 }

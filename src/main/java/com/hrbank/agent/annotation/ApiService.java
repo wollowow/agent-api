@@ -22,5 +22,5 @@ public @interface ApiService {
 
     Class<? extends Parser> parser() default Parser.class;
 
-    String description() default "";
+    String encoding() default "UTF-8";
 }

@@ -74,12 +74,10 @@ public class ApiProxy<T> extends AbstractApiProxy implements InvocationHandler, 
             String host = serviceAnnotation.host();
             host = StringUtils.isEmpty(host) ? this.configuration.getEnvironment().getProperty("remote.agent.host") :
                     host;
-            String path = serviceAnnotation.value();
-            if(!path.startsWith("/")){
-                path = "/" + path;
-            }
             invoker.setHost(host);
-            invoker.setPath(path);
+            invoker.setPath(serviceAnnotation.value());
+            invoker.setEncoding(serviceAnnotation.encoding());
+
         }
     }
 

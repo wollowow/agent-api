@@ -1,7 +1,6 @@
 package com.hrbank.agent.spring;
 
 import com.hrbank.agent.proxy.ApiConfiguration;
-import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;

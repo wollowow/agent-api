@@ -14,7 +14,7 @@ import org.springframework.util.StringUtils;
 public class DefaultJSONParser<T> implements Parser<T> {
 
     @Override
-    public T parserResult(String result, Class<T> tClass) {
+    public T parserResult(String result, Class<T> tClass, String... args) {
 
         if (StringUtils.isEmpty(result)) {
             throw new NullParamException("null param to parse!");

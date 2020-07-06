@@ -5,8 +5,8 @@ package com.hrbank.agent.parser;
  * @create 2020-05-27 16:34
  * @desc 解析返回结果
  **/
-public interface Parser<T>{
+public interface Parser<T> {
 
 
-    T parserResult(String result,Class<T> tClass);
+    T parserResult(String result, Class<T> tClass, String... args);
 }

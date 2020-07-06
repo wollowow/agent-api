@@ -31,8 +31,8 @@ public class OKHttpUtil {
                 .build();
         try (Response response = okHttpClient.newCall(request).execute()) {
             if (response.isSuccessful()) {
-                return response.body().string();
-            }
+                byte[] bytes = response.body().bytes();
+                return new String(bytes, encode);            }
         } catch (Exception e) {
             log.error("OKHttp post error >> url->{},ex : ", url, e);
         }

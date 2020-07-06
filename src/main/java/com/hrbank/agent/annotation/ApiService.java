@@ -14,13 +14,21 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 public @interface ApiService {
 
-    String value() default "";
+    //请求路径
+    String path() default "";
 
+    //请求地址
     String host() default "";
 
+    //请求方式
     ApiRequestType requestType() default ApiRequestType.XML;
 
+    //解析器
     Class<? extends Parser> parser() default Parser.class;
 
+    //请求编码
     String encoding() default "UTF-8";
+
+    //解析涉及参数
+    String[] args() default {};
 }

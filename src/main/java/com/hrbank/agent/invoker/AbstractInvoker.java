@@ -16,19 +16,20 @@ public abstract class AbstractInvoker<T> {
     private String host;
     private String path;
     private String encoding;
+    private String[] args;
 
-    public AbstractInvoker() {
+    AbstractInvoker() {
     }
 
     public abstract Object execute(Object[] var1) throws UnsupportedEncodingException;
 
-    public Object parseResult(String result){
+    Object parseResult(String result) {
         if (Parser.class == this.getParser() || StringUtils.isEmpty(result)) {
             return result;
         }
         try {
             Class resultType = this.getMethod().getReturnType();
-            return this.getParser().newInstance().parserResult(result, resultType);
+            return this.getParser().newInstance().parserResult(result, resultType, args);
         } catch (Exception e) {
             throw new ParseResultException("http result parse fail", e);
         }

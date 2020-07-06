@@ -18,8 +18,10 @@ public @interface ApiScan {
 
     String[] value() default {};
 
+    //服务扫描路径
     String[] basePackages() default {};
 
+    //配置后只加载带注解的类
     Class<? extends Annotation> annotationClass() default Annotation.class;
 
     Class<?> markerInterface() default Class.class;
